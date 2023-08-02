@@ -1,85 +1,43 @@
 <!DOCTYPE html>
+
 <html>
-<head>
-	<title>Table with API Data</title>
-</head>
-<body>
-	<h1>Table with API Data</h1>
-	<table>
-		<thead>
-			<tr>
-				<th>API URL</th>
-				<th>Data</th>
-			</tr>
-		</thead>
-		<tbody id="output-all">
-			<tr>
-				<td colspan="2">Loading...</td>
-			</tr>
-		</tbody>
-	</table>
-	<table>
-		<thead>
-			<tr>
-				<th>API URL</th>
-				<th>Data</th>
-			</tr>
-		</thead>
-		<tbody id="output-any">
-			<tr>
-				<td colspan="2">Loading...</td>
-			</tr>
-		</tbody>
-	</table>
-	<script>
-		const urls = [
-			'https://jsonplaceholder.typicode.com/todos/1',
-			'https://jsonplaceholder.typicode.com/todos/2',
-			'https://jsonplaceholder.typicode.com/todos/3',
-			'https://jsonplaceholder.typicode.com/todos/4',
-			'https://jsonplaceholder.typicode.com/todos/5',
-			"https://jsonplaceholder.typicode.com/todos/6",
-			 "https://jsonplaceholder.typicode.com/todos/7",
-			  "https://jsonplaceholder.typicode.com/todos/8",
-			  "https://jsonplaceholder.typicode.com/todos/9",
-			  "https://jsonplaceholder.typicode.com/todos/10",
-		];
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+  </head>
 
-		// Promise.all()
-		const allPromises = urls.map(url => fetch(url).then(response => response.json()));
-		Promise.all(allPromises)
-			.then(data => {
-				const output = document.querySelector('#output-all');
-				output.innerHTML = '';
-				data.forEach(item => {
-					const row = document.createElement('tr');
-					const urlCell = document.createElement('td');
-					const dataCell = document.createElement('td');
-					urlCell.textContent = item.url;
-					dataCell.textContent = JSON.stringify(item);
-					row.appendChild(urlCell);
-					row.appendChild(dataCell);
-					output.appendChild(row);
-				});
-			})
-			.catch(error => console.log(error));
+  <body>
+    <!-- the entire body must be written by student -->
+    <table class="table table-striped table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Promise Type</th>
+          <th>Time taken (ms)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Promise.all()</td>
+          <td id="output-all"></td>
+        </tr>
 
-		// Promise.any()
-		const anyPromises = urls.map(url => fetch(url).then(response => response.json()));
-		Promise.any(anyPromises)
-			.then(data => {
-				const output = document.querySelector('#output-any');
-				output.innerHTML = '';
-				const row = document.createElement('tr');
-				const urlCell = document.createElement('td');
-				const dataCell = document.createElement('td');
-				urlCell.textContent = data.url;
-				dataCell.textContent = JSON.stringify(data);
-				row.appendChild(urlCell);
-				row.appendChild(dataCell);
-				output.appendChild(row);
-			})
-			.catch(error => console.log(error));
-	</script>
-</body>
+        <tr>
+          <td>Promise.any()</td>
+          <td id="output-any"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script type="text/javascript" src="./script.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
